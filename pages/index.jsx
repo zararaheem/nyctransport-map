@@ -81,7 +81,7 @@ export default function Home() {
         <aside className="sidebar">
           <header className="sidebar-header">
             <div className="logo">
-              <span className="logo-icon">🚌</span>
+              <span className="logo-icon">TT</span>
               <div>
                 <div className="logo-title">Transport Tracker</div>
                 <div className="logo-sub">NYC Family Interest Map</div>
@@ -148,7 +148,7 @@ export default function Home() {
               <div className="list-empty">Loading from Google Sheets…</div>
             )}
             {error && (
-              <div className="list-error">⚠ {error}</div>
+              <div className="list-error">Error: {error}</div>
             )}
             {!loading && filtered.length === 0 && (
               <div className="list-empty">No entries match this filter.</div>
@@ -165,11 +165,11 @@ export default function Home() {
                   <div className="family-addr">
                     {f.geocoded
                       ? f.displayAddress
-                      : <span className="unmapped">⚠ Could not geocode</span>}
+                      : <span className="unmapped">Could not geocode</span>}
                   </div>
                 </div>
                 <span className="family-badge" style={{ color: STATUS_COLORS[f.status] }}>
-                  {f.status === "interested" ? "✓" : f.status === "not_interested" ? "✗" : "?"}
+                  {f.status === "interested" ? "Yes" : f.status === "not_interested" ? "No" : "Unknown"}
                 </span>
               </button>
             ))}
@@ -179,7 +179,7 @@ export default function Home() {
           <div className="sidebar-footer">
             <span>{counts.unmapped > 0 ? `${counts.unmapped} unmapped · ` : ""}</span>
             <button className="refresh-btn" onClick={() => loadData()} disabled={loading}>
-              {loading ? "Refreshing…" : "↺ Refresh"}
+              {loading ? "Refreshing…" : "Refresh"}
             </button>
             {lastRefresh && (
               <span className="refresh-time">
@@ -226,7 +226,7 @@ export default function Home() {
 
       <style jsx global>{`
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'DM Sans', sans-serif; background: #f1f5f9; }
+        body { font-family: 'DM Sans', sans-serif; background: #0b1220; color: #e2e8f0; }
 
         .app { display: flex; height: 100vh; overflow: hidden; }
 
@@ -234,8 +234,8 @@ export default function Home() {
         .sidebar {
           width: 320px;
           flex-shrink: 0;
-          background: #fff;
-          border-right: 1px solid #e2e8f0;
+          background: #111827;
+          border-right: 1px solid #1f2937;
           display: flex;
           flex-direction: column;
           overflow: hidden;
@@ -243,12 +243,24 @@ export default function Home() {
 
         .sidebar-header {
           padding: 18px 20px 14px;
-          border-bottom: 1px solid #f1f5f9;
+          border-bottom: 1px solid #1f2937;
         }
         .logo { display: flex; align-items: center; gap: 12px; }
-        .logo-icon { font-size: 24px; }
-        .logo-title { font-family: 'DM Mono', monospace; font-size: 13px; font-weight: 500; color: #0f172a; }
-        .logo-sub { font-size: 11px; color: #94a3b8; margin-top: 1px; }
+        .logo-icon {
+          width: 28px;
+          height: 28px;
+          border-radius: 6px;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 11px;
+          font-weight: 600;
+          letter-spacing: 0.4px;
+          background: #1f2937;
+          color: #93c5fd;
+        }
+        .logo-title { font-family: 'DM Mono', monospace; font-size: 13px; font-weight: 500; color: #e5e7eb; }
+        .logo-sub { font-size: 11px; color: #9ca3af; margin-top: 1px; }
 
         /* ── Banner ── */
         .banner {
@@ -256,19 +268,19 @@ export default function Home() {
           align-items: center;
           gap: 10px;
           padding: 12px 20px;
-          background: #f8fafc;
-          border-bottom: 1px solid #e2e8f0;
+          background: #0f172a;
+          border-bottom: 1px solid #1f2937;
         }
         .banner-stat { display: flex; align-items: baseline; gap: 5px; }
         .banner-num {
           font-family: 'DM Mono', monospace;
           font-size: 26px;
           font-weight: 500;
-          color: #0f172a;
+          color: #f8fafc;
           line-height: 1;
         }
-        .banner-label { font-size: 12px; color: #64748b; }
-        .banner-divider { font-size: 18px; color: #cbd5e1; margin: 0 2px; }
+        .banner-label { font-size: 12px; color: #9ca3af; }
+        .banner-divider { font-size: 18px; color: #374151; margin: 0 2px; }
         .banner-pulse {
           width: 7px;
           height: 7px;
@@ -290,42 +302,42 @@ export default function Home() {
           padding: 12px 16px;
         }
         .stat-card {
-          background: #f8fafc;
-          border: 1.5px solid #e2e8f0;
+          background: #111827;
+          border: 1.5px solid #1f2937;
           border-radius: 10px;
           padding: 10px 12px;
           cursor: pointer;
           text-align: left;
           transition: all 0.15s;
         }
-        .stat-card:hover { border-color: #cbd5e1; }
-        .stat-card.active { border-color: #334155; background: #f1f5f9; }
-        .stat-count { font-family: 'DM Mono', monospace; font-size: 20px; font-weight: 500; color: #0f172a; }
-        .stat-label { font-size: 11px; color: #64748b; margin-top: 2px; }
+        .stat-card:hover { border-color: #334155; }
+        .stat-card.active { border-color: #475569; background: #1f2937; }
+        .stat-count { font-family: 'DM Mono', monospace; font-size: 20px; font-weight: 500; color: #f8fafc; }
+        .stat-label { font-size: 11px; color: #9ca3af; margin-top: 2px; }
 
         /* ── Search ── */
         .search-wrap { position: relative; padding: 0 16px 12px; }
         .search-icon {
           position: absolute; left: 28px; top: 50%;
-          transform: translateY(-60%); font-size: 16px; color: #94a3b8;
+          transform: translateY(-60%); font-size: 16px; color: #6b7280;
         }
         .search-input {
           width: 100%;
           padding: 9px 12px 9px 32px;
-          border: 1.5px solid #e2e8f0;
+          border: 1.5px solid #1f2937;
           border-radius: 8px;
           font-family: 'DM Sans', sans-serif;
           font-size: 13px;
-          background: #f8fafc;
-          color: #0f172a;
+          background: #0f172a;
+          color: #e5e7eb;
           outline: none;
           transition: border-color 0.15s;
         }
-        .search-input:focus { border-color: #94a3b8; background: #fff; }
+        .search-input:focus { border-color: #475569; background: #111827; }
 
         /* ── Family list ── */
         .family-list { flex: 1; overflow-y: auto; padding: 0 8px; }
-        .list-empty { padding: 24px; text-align: center; font-size: 13px; color: #94a3b8; }
+        .list-empty { padding: 24px; text-align: center; font-size: 13px; color: #9ca3af; }
         .list-error {
           margin: 12px; padding: 12px;
           background: #fef2f2; border: 1px solid #fecaca;
@@ -339,30 +351,30 @@ export default function Home() {
           background: transparent; cursor: pointer; text-align: left;
           transition: all 0.12s;
         }
-        .family-row:hover   { background: #f8fafc; border-color: #e2e8f0; }
-        .family-row.selected { background: #f1f5f9; border-color: #cbd5e1; }
+        .family-row:hover   { background: #0f172a; border-color: #1f2937; }
+        .family-row.selected { background: #1f2937; border-color: #334155; }
 
         .dot { width: 9px; height: 9px; border-radius: 50%; margin-top: 4px; flex-shrink: 0; }
         .family-info { flex: 1; min-width: 0; }
-        .family-name { font-size: 13px; font-weight: 500; color: #0f172a; }
-        .family-addr { font-size: 11px; color: #94a3b8; margin-top: 2px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        .family-name { font-size: 13px; font-weight: 500; color: #e5e7eb; }
+        .family-addr { font-size: 11px; color: #9ca3af; margin-top: 2px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
         .unmapped { color: #f59e0b; }
         .family-badge { font-family: 'DM Mono', monospace; font-size: 14px; font-weight: 500; flex-shrink: 0; margin-top: 1px; }
 
         /* ── Footer ── */
         .sidebar-footer {
           padding: 10px 16px;
-          border-top: 1px solid #f1f5f9;
-          font-size: 11px; color: #94a3b8;
+          border-top: 1px solid #1f2937;
+          font-size: 11px; color: #9ca3af;
           display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
         }
         .refresh-btn {
-          background: none; border: 1px solid #e2e8f0;
+          background: #111827; border: 1px solid #1f2937;
           border-radius: 6px; padding: 3px 10px;
-          font-size: 11px; cursor: pointer; color: #475569;
+          font-size: 11px; cursor: pointer; color: #e5e7eb;
           font-family: 'DM Mono', monospace; transition: all 0.12s;
         }
-        .refresh-btn:hover { background: #f8fafc; }
+        .refresh-btn:hover { background: #0f172a; }
         .refresh-btn:disabled { opacity: 0.5; cursor: default; }
         .refresh-time { margin-left: auto; }
 
@@ -371,17 +383,17 @@ export default function Home() {
 
         .legend {
           position: absolute; bottom: 32px; left: 24px; z-index: 10;
-          background: rgba(255,255,255,0.96); border: 1px solid #e2e8f0;
+          background: rgba(17,24,39,0.92); border: 1px solid #1f2937;
           border-radius: 10px; padding: 10px 14px;
           display: flex; flex-direction: column; gap: 6px;
           box-shadow: 0 2px 8px rgba(0,0,0,0.08);
         }
-        .legend-item { display: flex; align-items: center; gap: 8px; font-size: 12px; color: #475569; }
+        .legend-item { display: flex; align-items: center; gap: 8px; font-size: 12px; color: #e5e7eb; }
         .legend-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
 
         .detail-card {
           position: absolute; top: 24px; right: 24px; z-index: 10;
-          background: #fff; border: 1px solid #e2e8f0;
+          background: #111827; border: 1px solid #1f2937;
           border-radius: 12px; padding: 16px 20px;
           max-width: 260px; box-shadow: 0 4px 16px rgba(0,0,0,0.1);
         }
@@ -390,9 +402,9 @@ export default function Home() {
           background: none; border: none; font-size: 14px;
           color: #94a3b8; cursor: pointer;
         }
-        .detail-name { font-size: 15px; font-weight: 600; color: #0f172a; margin-bottom: 4px; padding-right: 16px; }
-        .detail-addr { font-size: 12px; color: #64748b; line-height: 1.5; }
-        .detail-raw { font-size: 11px; color: #94a3b8; margin-top: 4px; font-style: italic; }
+        .detail-name { font-size: 15px; font-weight: 600; color: #f8fafc; margin-bottom: 4px; padding-right: 16px; }
+        .detail-addr { font-size: 12px; color: #cbd5e1; line-height: 1.5; }
+        .detail-raw { font-size: 11px; color: #9ca3af; margin-top: 4px; font-style: italic; }
         .detail-status { margin-top: 10px; font-size: 12px; font-weight: 600; font-family: 'DM Mono', monospace; }
       `}</style>
     </>

@@ -73,7 +73,7 @@ export default function Home() {
         <title>Transport Interest Map</title>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet" />
       </Head>
 
       <div className="app">
@@ -226,16 +226,15 @@ export default function Home() {
 
       <style jsx global>{`
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'DM Sans', sans-serif; background: #0b1220; color: #e2e8f0; }
+        body { font-family: 'Inter', sans-serif; background: #f3f4f6; color: #111827; }
 
         .app { display: flex; height: 100vh; overflow: hidden; }
 
-        /* ── Sidebar ── */
         .sidebar {
-          width: 320px;
+          width: 340px;
           flex-shrink: 0;
-          background: #111827;
-          border-right: 1px solid #1f2937;
+          background: #ffffff;
+          border-right: 1px solid #e5e7eb;
           display: flex;
           flex-direction: column;
           overflow: hidden;
@@ -243,12 +242,14 @@ export default function Home() {
 
         .sidebar-header {
           padding: 18px 20px 14px;
+          border-bottom: 1px solid #eef2f7;
           border-bottom: 1px solid #1f2937;
         }
         .logo { display: flex; align-items: center; gap: 12px; }
         .logo-icon {
           width: 28px;
           height: 28px;
+          border-radius: 8px;
           border-radius: 6px;
           display: inline-flex;
           align-items: center;
@@ -256,18 +257,35 @@ export default function Home() {
           font-size: 11px;
           font-weight: 600;
           letter-spacing: 0.4px;
+          background: #0f172a;
+          color: #f8fafc;
+        }
+        .logo-title { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 600; color: #0f172a; }
+        .logo-sub { font-size: 11px; color: #6b7280; margin-top: 1px; }
           background: #1f2937;
           color: #93c5fd;
         }
         .logo-title { font-family: 'DM Mono', monospace; font-size: 13px; font-weight: 500; color: #e5e7eb; }
         .logo-sub { font-size: 11px; color: #9ca3af; margin-top: 1px; }
 
-        /* ── Banner ── */
         .banner {
           display: flex;
           align-items: center;
           gap: 10px;
           padding: 12px 20px;
+          background: #f8fafc;
+          border-bottom: 1px solid #e5e7eb;
+        }
+        .banner-stat { display: flex; align-items: baseline; gap: 5px; }
+        .banner-num {
+          font-family: 'JetBrains Mono', monospace;
+          font-size: 24px;
+          font-weight: 600;
+          color: #0f172a;
+          line-height: 1;
+        }
+        .banner-label { font-size: 12px; color: #6b7280; }
+        .banner-divider { font-size: 18px; color: #cbd5e1; margin: 0 2px; }
           background: #0f172a;
           border-bottom: 1px solid #1f2937;
         }
@@ -282,26 +300,20 @@ export default function Home() {
         .banner-label { font-size: 12px; color: #9ca3af; }
         .banner-divider { font-size: 18px; color: #374151; margin: 0 2px; }
         .banner-pulse {
-          width: 7px;
-          height: 7px;
-          border-radius: 50%;
-          background: #22c55e;
-          margin-left: auto;
+          width: 7px; height: 7px; border-radius: 50%; background: #22c55e; margin-left: auto;
           animation: pulse 1.4s ease-in-out infinite;
         }
-        @keyframes pulse {
-          0%, 100% { opacity: 1; transform: scale(1); }
-          50%       { opacity: 0.4; transform: scale(0.7); }
-        }
+        @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.4;transform:scale(.7)} }
 
-        /* ── Stats grid ── */
-        .stats-grid {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 8px;
-          padding: 12px 16px;
-        }
+        .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; padding: 12px 16px; }
         .stat-card {
+          background: #ffffff; border: 1.5px solid #e5e7eb; border-radius: 10px;
+          padding: 10px 12px; cursor: pointer; text-align: left; transition: all .15s;
+        }
+        .stat-card:hover { border-color: #cbd5e1; }
+        .stat-card.active { border-color: #334155; background: #f8fafc; }
+        .stat-count { font-family: 'JetBrains Mono', monospace; font-size: 20px; font-weight: 600; color: #0f172a; }
+        .stat-label { font-size: 11px; color: #6b7280; margin-top: 2px; }
           background: #111827;
           border: 1.5px solid #1f2937;
           border-radius: 10px;
@@ -315,8 +327,14 @@ export default function Home() {
         .stat-count { font-family: 'DM Mono', monospace; font-size: 20px; font-weight: 500; color: #f8fafc; }
         .stat-label { font-size: 11px; color: #9ca3af; margin-top: 2px; }
 
-        /* ── Search ── */
         .search-wrap { position: relative; padding: 0 16px 12px; }
+        .search-icon { position: absolute; left: 28px; top: 50%; transform: translateY(-60%); font-size: 16px; color: #9ca3af; }
+        .search-input {
+          width: 100%; padding: 9px 12px 9px 32px; border: 1.5px solid #e5e7eb; border-radius: 8px;
+          font-family: 'Inter', sans-serif; font-size: 13px; background: #ffffff; color: #0f172a; outline: none;
+          transition: border-color .15s;
+        }
+        .search-input:focus { border-color: #94a3b8; }
         .search-icon {
           position: absolute; left: 28px; top: 50%;
           transform: translateY(-60%); font-size: 16px; color: #6b7280;
@@ -335,9 +353,9 @@ export default function Home() {
         }
         .search-input:focus { border-color: #475569; background: #111827; }
 
-        /* ── Family list ── */
         .family-list { flex: 1; overflow-y: auto; padding: 0 8px; }
         .list-empty { padding: 24px; text-align: center; font-size: 13px; color: #9ca3af; }
+        .list-error { margin: 12px; padding: 12px; background: #fef2f2; border: 1px solid #fecaca; border-radius: 8px; font-size: 12px; color: #dc2626; }
         .list-error {
           margin: 12px; padding: 12px;
           background: #fef2f2; border: 1px solid #fecaca;
@@ -345,12 +363,19 @@ export default function Home() {
         }
 
         .family-row {
-          display: flex; align-items: flex-start; gap: 10px;
-          width: 100%; padding: 10px 12px;
-          border-radius: 8px; border: 1.5px solid transparent;
-          background: transparent; cursor: pointer; text-align: left;
-          transition: all 0.12s;
+          display: flex; align-items: flex-start; gap: 10px; width: 100%; padding: 10px 12px;
+          border-radius: 8px; border: 1.5px solid transparent; background: transparent; cursor: pointer; text-align: left;
+          transition: all .12s;
         }
+        .family-row:hover { background: #f8fafc; border-color: #e5e7eb; }
+        .family-row.selected { background: #f1f5f9; border-color: #cbd5e1; }
+
+        .dot { width: 9px; height: 9px; border-radius: 50%; margin-top: 4px; flex-shrink: 0; }
+        .family-info { flex: 1; min-width: 0; }
+        .family-name { font-size: 13px; font-weight: 500; color: #0f172a; }
+        .family-addr { font-size: 11px; color: #6b7280; margin-top: 2px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        .unmapped { color: #d97706; }
+        .family-badge { font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 600; flex-shrink: 0; margin-top: 1px; }
         .family-row:hover   { background: #0f172a; border-color: #1f2937; }
         .family-row.selected { background: #1f2937; border-color: #334155; }
 
@@ -361,8 +386,16 @@ export default function Home() {
         .unmapped { color: #f59e0b; }
         .family-badge { font-family: 'DM Mono', monospace; font-size: 14px; font-weight: 500; flex-shrink: 0; margin-top: 1px; }
 
-        /* ── Footer ── */
         .sidebar-footer {
+          padding: 10px 16px; border-top: 1px solid #eef2f7; font-size: 11px; color: #9ca3af;
+          display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+        }
+        .refresh-btn {
+          background: #fff; border: 1px solid #e5e7eb; border-radius: 6px; padding: 4px 10px;
+          font-size: 11px; cursor: pointer; color: #334155; font-family: 'JetBrains Mono', monospace; transition: all .12s;
+        }
+        .refresh-btn:hover { background: #f8fafc; }
+        .refresh-btn:disabled { opacity: .5; cursor: default; }
           padding: 10px 16px;
           border-top: 1px solid #1f2937;
           font-size: 11px; color: #9ca3af;
@@ -378,10 +411,24 @@ export default function Home() {
         .refresh-btn:disabled { opacity: 0.5; cursor: default; }
         .refresh-time { margin-left: auto; }
 
-        /* ── Map area ── */
         .map-area { flex: 1; position: relative; }
-
         .legend {
+          position: absolute; bottom: 24px; left: 24px; z-index: 10;
+          background: rgba(255,255,255,0.92); border: 1px solid #e5e7eb; border-radius: 10px; padding: 10px 14px;
+          display: flex; flex-direction: column; gap: 6px; box-shadow: 0 4px 12px rgba(15,23,42,.08);
+        }
+        .legend-item { display: flex; align-items: center; gap: 8px; font-size: 12px; color: #334155; }
+        .legend-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+
+        .detail-card {
+          position: absolute; top: 24px; right: 24px; z-index: 10; background: #fff; border: 1px solid #e5e7eb;
+          border-radius: 12px; padding: 16px 20px; max-width: 280px; box-shadow: 0 10px 24px rgba(2,6,23,.15);
+        }
+        .detail-close { position: absolute; top: 10px; right: 12px; background: none; border: none; font-size: 14px; color: #94a3b8; cursor: pointer; }
+        .detail-name { font-size: 15px; font-weight: 600; color: #0f172a; margin-bottom: 4px; padding-right: 16px; }
+        .detail-addr { font-size: 12px; color: #475569; line-height: 1.5; }
+        .detail-raw { font-size: 11px; color: #9ca3af; margin-top: 4px; font-style: italic; }
+        .detail-status { margin-top: 10px; font-size: 12px; font-weight: 600; font-family: 'JetBrains Mono', monospace; }
           position: absolute; bottom: 32px; left: 24px; z-index: 10;
           background: rgba(17,24,39,0.92); border: 1px solid #1f2937;
           border-radius: 10px; padding: 10px 14px;

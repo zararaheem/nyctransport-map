@@ -243,12 +243,14 @@ export default function Home() {
         .sidebar-header {
           padding: 18px 20px 14px;
           border-bottom: 1px solid #eef2f7;
+          border-bottom: 1px solid #1f2937;
         }
         .logo { display: flex; align-items: center; gap: 12px; }
         .logo-icon {
           width: 28px;
           height: 28px;
           border-radius: 8px;
+          border-radius: 6px;
           display: inline-flex;
           align-items: center;
           justify-content: center;
@@ -260,6 +262,11 @@ export default function Home() {
         }
         .logo-title { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 600; color: #0f172a; }
         .logo-sub { font-size: 11px; color: #6b7280; margin-top: 1px; }
+          background: #1f2937;
+          color: #93c5fd;
+        }
+        .logo-title { font-family: 'DM Mono', monospace; font-size: 13px; font-weight: 500; color: #e5e7eb; }
+        .logo-sub { font-size: 11px; color: #9ca3af; margin-top: 1px; }
 
         .banner {
           display: flex;
@@ -279,6 +286,19 @@ export default function Home() {
         }
         .banner-label { font-size: 12px; color: #6b7280; }
         .banner-divider { font-size: 18px; color: #cbd5e1; margin: 0 2px; }
+          background: #0f172a;
+          border-bottom: 1px solid #1f2937;
+        }
+        .banner-stat { display: flex; align-items: baseline; gap: 5px; }
+        .banner-num {
+          font-family: 'DM Mono', monospace;
+          font-size: 26px;
+          font-weight: 500;
+          color: #f8fafc;
+          line-height: 1;
+        }
+        .banner-label { font-size: 12px; color: #9ca3af; }
+        .banner-divider { font-size: 18px; color: #374151; margin: 0 2px; }
         .banner-pulse {
           width: 7px; height: 7px; border-radius: 50%; background: #22c55e; margin-left: auto;
           animation: pulse 1.4s ease-in-out infinite;
@@ -294,6 +314,18 @@ export default function Home() {
         .stat-card.active { border-color: #334155; background: #f8fafc; }
         .stat-count { font-family: 'JetBrains Mono', monospace; font-size: 20px; font-weight: 600; color: #0f172a; }
         .stat-label { font-size: 11px; color: #6b7280; margin-top: 2px; }
+          background: #111827;
+          border: 1.5px solid #1f2937;
+          border-radius: 10px;
+          padding: 10px 12px;
+          cursor: pointer;
+          text-align: left;
+          transition: all 0.15s;
+        }
+        .stat-card:hover { border-color: #334155; }
+        .stat-card.active { border-color: #475569; background: #1f2937; }
+        .stat-count { font-family: 'DM Mono', monospace; font-size: 20px; font-weight: 500; color: #f8fafc; }
+        .stat-label { font-size: 11px; color: #9ca3af; margin-top: 2px; }
 
         .search-wrap { position: relative; padding: 0 16px 12px; }
         .search-icon { position: absolute; left: 28px; top: 50%; transform: translateY(-60%); font-size: 16px; color: #9ca3af; }
@@ -303,10 +335,32 @@ export default function Home() {
           transition: border-color .15s;
         }
         .search-input:focus { border-color: #94a3b8; }
+        .search-icon {
+          position: absolute; left: 28px; top: 50%;
+          transform: translateY(-60%); font-size: 16px; color: #6b7280;
+        }
+        .search-input {
+          width: 100%;
+          padding: 9px 12px 9px 32px;
+          border: 1.5px solid #1f2937;
+          border-radius: 8px;
+          font-family: 'DM Sans', sans-serif;
+          font-size: 13px;
+          background: #0f172a;
+          color: #e5e7eb;
+          outline: none;
+          transition: border-color 0.15s;
+        }
+        .search-input:focus { border-color: #475569; background: #111827; }
 
         .family-list { flex: 1; overflow-y: auto; padding: 0 8px; }
         .list-empty { padding: 24px; text-align: center; font-size: 13px; color: #9ca3af; }
         .list-error { margin: 12px; padding: 12px; background: #fef2f2; border: 1px solid #fecaca; border-radius: 8px; font-size: 12px; color: #dc2626; }
+        .list-error {
+          margin: 12px; padding: 12px;
+          background: #fef2f2; border: 1px solid #fecaca;
+          border-radius: 8px; font-size: 12px; color: #dc2626;
+        }
 
         .family-row {
           display: flex; align-items: flex-start; gap: 10px; width: 100%; padding: 10px 12px;
@@ -322,6 +376,15 @@ export default function Home() {
         .family-addr { font-size: 11px; color: #6b7280; margin-top: 2px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
         .unmapped { color: #d97706; }
         .family-badge { font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 600; flex-shrink: 0; margin-top: 1px; }
+        .family-row:hover   { background: #0f172a; border-color: #1f2937; }
+        .family-row.selected { background: #1f2937; border-color: #334155; }
+
+        .dot { width: 9px; height: 9px; border-radius: 50%; margin-top: 4px; flex-shrink: 0; }
+        .family-info { flex: 1; min-width: 0; }
+        .family-name { font-size: 13px; font-weight: 500; color: #e5e7eb; }
+        .family-addr { font-size: 11px; color: #9ca3af; margin-top: 2px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        .unmapped { color: #f59e0b; }
+        .family-badge { font-family: 'DM Mono', monospace; font-size: 14px; font-weight: 500; flex-shrink: 0; margin-top: 1px; }
 
         .sidebar-footer {
           padding: 10px 16px; border-top: 1px solid #eef2f7; font-size: 11px; color: #9ca3af;
@@ -333,6 +396,19 @@ export default function Home() {
         }
         .refresh-btn:hover { background: #f8fafc; }
         .refresh-btn:disabled { opacity: .5; cursor: default; }
+          padding: 10px 16px;
+          border-top: 1px solid #1f2937;
+          font-size: 11px; color: #9ca3af;
+          display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+        }
+        .refresh-btn {
+          background: #111827; border: 1px solid #1f2937;
+          border-radius: 6px; padding: 3px 10px;
+          font-size: 11px; cursor: pointer; color: #e5e7eb;
+          font-family: 'DM Mono', monospace; transition: all 0.12s;
+        }
+        .refresh-btn:hover { background: #0f172a; }
+        .refresh-btn:disabled { opacity: 0.5; cursor: default; }
         .refresh-time { margin-left: auto; }
 
         .map-area { flex: 1; position: relative; }
@@ -353,6 +429,30 @@ export default function Home() {
         .detail-addr { font-size: 12px; color: #475569; line-height: 1.5; }
         .detail-raw { font-size: 11px; color: #9ca3af; margin-top: 4px; font-style: italic; }
         .detail-status { margin-top: 10px; font-size: 12px; font-weight: 600; font-family: 'JetBrains Mono', monospace; }
+          position: absolute; bottom: 32px; left: 24px; z-index: 10;
+          background: rgba(17,24,39,0.92); border: 1px solid #1f2937;
+          border-radius: 10px; padding: 10px 14px;
+          display: flex; flex-direction: column; gap: 6px;
+          box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        .legend-item { display: flex; align-items: center; gap: 8px; font-size: 12px; color: #e5e7eb; }
+        .legend-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+
+        .detail-card {
+          position: absolute; top: 24px; right: 24px; z-index: 10;
+          background: #111827; border: 1px solid #1f2937;
+          border-radius: 12px; padding: 16px 20px;
+          max-width: 260px; box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+        }
+        .detail-close {
+          position: absolute; top: 10px; right: 12px;
+          background: none; border: none; font-size: 14px;
+          color: #94a3b8; cursor: pointer;
+        }
+        .detail-name { font-size: 15px; font-weight: 600; color: #f8fafc; margin-bottom: 4px; padding-right: 16px; }
+        .detail-addr { font-size: 12px; color: #cbd5e1; line-height: 1.5; }
+        .detail-raw { font-size: 11px; color: #9ca3af; margin-top: 4px; font-style: italic; }
+        .detail-status { margin-top: 10px; font-size: 12px; font-weight: 600; font-family: 'DM Mono', monospace; }
       `}</style>
     </>
   );
